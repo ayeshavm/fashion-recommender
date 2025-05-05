@@ -19,6 +19,7 @@ AI Fashion Recommender is an AI-powered fashion app that helps you complete your
 2. Generate caption (powered by BLIP) for item type identification.
 3. View detected item type (e.g. “top,” “shoes”).
 4. Get recommendations for similar items.
+![Selected Item](data/screenshots/item_gallery_img.png)
 ![Item Recommendations](data/screenshots/reco_gallery_img.png)
 5. View recommendations of complementary items to complete the look.
 ![Complete the Look](data/screenshots/ctl_gallery_img.png)
