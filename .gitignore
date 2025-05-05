@@ -1,0 +1,21 @@
+# Ignore data & output folders
+data/images/
+data/output/
+
+# Ignore Jupyter notebooks
+notebooks/
+
+# Ignore Streamlit app folder 
+streamlit-app/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+

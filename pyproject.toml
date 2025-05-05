@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "fashion-recommender"
+version = "0.1.0"
+description = ""
+authors = ["ayeshavm <ayesha.mendoza@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+streamlit = "^1.44.1"
+torch = "2.2.1"
+numpy = "^1.26.4"
+pandas = "^2.2.3"
+scikit-learn = "^1.6.1"
+faiss-cpu = "^1.10.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
