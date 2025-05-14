@@ -2,6 +2,16 @@
 
 AI Fashion Recommender is an AI-powered fashion app that helps you complete your outfit with style. Upload a clothing item or choose from your closet gallery, and the app will suggest complementary pieces and similar items to create a complete look.
 
+## 🧠 How It Works (Technical Overview)
+The system combines image captioning, embedding-based retrieval, and rule-based logic to generate outfit suggestions:
+
+- Uploaded or gallery images are processed with BLIP to generate natural language captions
+- These captions are mapped to general item types (e.g., “top”, “shoes”) using simple tag-style parsing
+- CLIP image embeddings power a visual similarity search, retrieving items with similar styles
+- A rule-based logic layer then recommends complementary items based on the detected item type (e.g., matching tops with bottoms)
+
+All components run in a Streamlit UI, designed for both desktop and mobile access.
+
 ## ✨ Features
 
 - ✅ **Closet Camera Upload:** Upload your own clothing item image
@@ -49,7 +59,3 @@ app.py → main Streamlit app
 - Caption accuracy may vary 
 - Rule-based recommendation logic → may miss nuanced styling contexts
 - Gallery UX in progress (currently shows all images every time)
-
-## 💬 **Project Purpose**
-
-This app was created as a playful, creative AI application blending computer vision and recommendation systems to assist with everyday styling. It serves as a portfolio piece demonstrating applied machine learning, user interface design, and thoughtful AI-powered user experiences.
