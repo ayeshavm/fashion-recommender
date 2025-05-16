@@ -7,9 +7,11 @@ Fashion Recommenders are behind nearly every shopping experience - from suggesti
 In this project, I built a Graph Neural Network (GNN) used for unsupervised fashion recommendation.  The model learns item relationships from co-occurrence data and visual context, allowing it to generate meaningful product suggestions based on learned embeddings.
 
 ## 🧩 **Problem Description**
-Not everyone has an intuitive sense of style.  Choosing what to wear or even figuring out what goes together can ften feel frustrating and time-consuming.  For many, shopping can be overwhelming, with endless options but little guidance tailored to their personal taste.  This project aims to ease that process by learning patterns in product relationships, and visual aesthetics.  By building a Graph Neural Network (GNN) model that captures the connections between fashion items, we can generate personalized and visually coherent product recommendations.
+Not everyone has an intuitive sense of style.  Choosing what to wear or even figuring out what goes together can ften feel frustrating and time-consuming.  For many, shopping can be overwhelming, with endless options but little guidance tailored to their personal taste.  
 
-Instead of hard-coded rules or manual tagging, the model learns from real world data -- how products are styled together or co-appear in scenes to create embeddings that reflect nuanced relationships in fashion.  These embeddings are then used to suggest similar or complementary items that help users discover styles that feel authentic and good to wear.
+This project aims to ease that process by learning patterns in product relationships, and visual aesthetics.  By building a Graph Neural Network (GNN) model that captures the connections between fashion items, we can generate personalized and visually coherent product recommendations. Instead of relying on hard-coded rules or manual tagging, the system uses a Graph Neural Network (GNN) to learn embeddings that reflect nuanced relationships in fashion — from visual similarity to contextual co-occurrence.
+
+These embeddings are then used to suggest similar or complementary items, helping users discover styles that feel both authentic and wearable.
 
 ## 🗂 **Data**
 A curated collection of Zara product images, organized by clothing type and visual style:
@@ -22,7 +24,7 @@ A curated collection of Zara product images, organized by clothing type and visu
 - Generate the graph architecture, where
    - `Nodes` : item node i.e. each item image will have an item node
                attribute node i.e. each keyword will correspond to an attribute node
-   - `Edges` : item -> attribute edge, and we have iten -> item for item similarity edges
+   - `Edges` : item -> attribute edge, and we have item -> item for item similarity edges
 
 Example of BLIP captions generated: 
 
@@ -106,11 +108,19 @@ app.py → main Streamlit app
 ## 🧾 **Summary**
 
 **EDA insights**
-- Clear clusters emerge in visual embedding space, even across different item types.
-- Some product categories (e.g., tops, outerwear) dominate, but visual similarity helps bridge gaps between them.
+- Visual Clustering: UMAP projections of CLIP embeddings reveal clear clusters by item type (e.g., sweaters, pants, hats), with visually similar products naturally grouped.
+- Embedding Space Coherence: Even with limited training data, items worn by models or photographed under similar lighting often cluster together.
+- GCN Impact: After training the GCN on the item-attribute graph, node embeddings reflect both visual similarity and attribute-based relationships, improving recommendations.
 
 **Known Limitations**
 
 - Caption accuracy may vary 
 - Rule-based recommendation logic → may miss nuanced styling contexts
 - Gallery UX in progress (currently shows all images every time)
+
+## 🔮 **Future Improvements**
+
+- Replace rule-based logic with learned compatibility models (e.g., outfit scoring with Siamese or Transformer-based architecture)
+- Improve item captioning using fine-tuned BLIP or LLaVA
+- Add search, filters to improve UX.
+- Expand graph structure with user-item interactions (if available)
