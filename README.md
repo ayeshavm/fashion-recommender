@@ -121,6 +121,7 @@ GCN details:
 - Python
 
 ## 📂 **Project Structure**
+```
 │
 ├── data/ # Screenshots, sample input, outputs
 │ └── screenshots/ # Captures from UI and EDA
@@ -135,6 +136,7 @@ GCN details:
 │
 ├── app.py # Streamlit application
 └── README.md
+```
 
 
 ## 🧾 **Summary**
