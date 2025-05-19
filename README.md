@@ -7,7 +7,8 @@ Fashion Recommenders are behind nearly every shopping experience - from suggesti
 In this project, I built a Graph Neural Network (GNN) used for unsupervised fashion recommendation.  The model learns item relationships from co-occurrence data and visual context, allowing it to generate meaningful product suggestions based on learned embeddings.
 
 ## 🧩 **Problem Description**
-Not everyone has an intuitive sense of style.  Choosing what to wear or even figuring out what goes together can often feel frustrating and time-consuming.  For many, shopping can be overwhelming, with endless options but little guidance tailored to their personal taste.  
+Not everyone has an intuitive sense of style.  Choosing what to wear or even figuring out what goes together can often feel frustrating and time-consuming.  For many, shopping can be overwhelming, with endless options but little guidance tailored to their personal taste.  My goal is to reduce
+decision fatigue and offer smart, contextual outfit suggestions based on visual and attribute relationships.
 
 This project aims to ease that process by learning patterns in product relationships, and visual aesthetics.  By building a Graph Neural Network (GNN) model that captures the connections between fashion items, we can generate personalized and visually coherent product recommendations. Instead of relying on hard-coded rules or manual tagging, the system uses a Graph Neural Network (GNN) to learn embeddings that reflect nuanced relationships in fashion - from visual similarity to contextual co-occurrence.
 
@@ -36,7 +37,7 @@ Example of BLIP captions generated:
 
 
 ## 🔍 **EDA**
-- When we plot the images in 2D space, we can see how similar items are clustered together.
+- When we plot the images in 2D space using UMAP, we can see how similar items are clustered together.
    - items i.e. sweaters, hats, pants are clustered together
    - and images with models are clustered together
 
@@ -54,25 +55,49 @@ Example of BLIP captions generated:
    ![Node Embeddings after GCN](data/screenshots/mvp-embeddings-afterGCN.png)
 
 
-## 🧠 **The Fashion Recommender App - How It Works (Technical Overview)**
-The system combines image captioning, embedding-based retrieval, and rule-based logic to generate outfit suggestions:
+## 🧠 Methodology: How the Recommender Works:
+This project combines multimodal embedding techniques and a graph-based learning framework to generate both visually similar and complementary outfit recommendations.
 
-- Uploaded or gallery images are processed with BLIP to generate natural language captions
-- These captions are mapped to general item types (e.g., “top”, “shoes”) using simple tag-style parsing
-- CLIP image embeddings power a visual similarity search, retrieving items with similar styles
-- A rule-based logic layer then recommends complementary items based on the detected item type (e.g., matching tops with bottoms)
+### Step 1: Image Captioning and Item Typing
+- Uploaded or gallery images are passed through the BLIP model to generate natural language captions.
+- Captions are then parsed to extract general item types (e.g., "skirt", "jacket", "top") using rule-based keyword tagging.
 
-All components run in a Streamlit UI, designed for both desktop and mobile access.
+### Step 2: Embedding Generation (CLIP)
+- Each image is encoded into a dense vector representation using CLIP, capturing its visual style and context.
+- These embeddings are used for both:
+  - Visual similarity (nearest neighbor search)
+  - Graph construction and downstream learning
+
+### Step 3: Graph Construction
+We build a heterogeneous graph with two node types:
+- **Item Nodes**: Each product image
+- **Attribute Nodes**: Tags parsed from captions (e.g., "pleated", "brown", "jacket")
+
+Edges include:
+- `item → attribute` (from parsed captions)
+- `item → item` (if visually similar or co-occur)
+
+### Step 4: Graph Learning (GCN)
+A Graph Convolutional Network (GCN) is trained on this item-attribute graph:
+- The GCN aggregates node features across the graph structure to produce refined node embeddings.
+- These embeddings encode visual and contextual relationships learned from the graph structure.
+- Output embeddings are used for similarity scoring and recommendation retrieval (top-K).
+
+GCN details:
+- 2-layer GCN using PyTorch Geometric
+- Aggregation function: mean
+- Trained in unsupervised fashion to smooth embeddings across neighbors)
+
 
 ## ✨ Features
 
-- ✅ **Closet Camera Upload:** Upload your own clothing item image
-- ✅ **Gallery Selection:** Browse and select from a gallery of your existing items
-- ✅ **Image Captioning with BLIP:** Generates natural language descriptions of uploaded or gallery images
-- ✅ **Item Type Detection:** Maps image captions to general clothing categories
-- ✅ **Complete-the-Look Recommendations:** Suggests complementary items based on detected type using rule-based logic
-- ✅ **Visual Similarity Recommendations:** Retrieve similar items using CLIP image embeddings
-- ✅ **Mobile-Friendly UI:** Works across desktop and mobile screens
+- 🧺 **Closet Camera Upload:** Upload your own clothing item image
+- 🖼️ **Gallery Selection:** Browse and select from a gallery of your items
+- 🧠 **Image Captioning (BLIP):** Generates descriptions of clothing items
+- 🏷️ **Item Type Detection:** Maps captions to general fashion categories
+- 💫 **Visual Similarity Search:** Retrieve visually similar items using CLIP embeddings
+- 👗 **Complete-the-Look Suggestions:** Recommends complementary items using rule-based logic
+- 📱 **Mobile-Friendly UI:** Built with Streamlit for desktop and mobile use
 
 ## 🖼️ **Example Flow**
 
@@ -96,15 +121,21 @@ All components run in a Streamlit UI, designed for both desktop and mobile acces
 - Python
 
 ## 📂 **Project Structure**
-```
-/data/
-/images/ → input images (gallery)
-/output/ → saved captions, embeddings
-/ src /
-   retrieval.py → retrieval functions
-   evaluation.py → logging & evaluation utils
-app.py → main Streamlit app
-```
+│
+├── data/ # Screenshots, sample input, outputs
+│ └── screenshots/ # Captures from UI and EDA
+│
+├── images/ # Raw input clothing images
+├── output/ # Captions, embeddings
+│
+├── src/ # Core Python code
+│ ├── retrieval.py # Embedding similarity + Top-K item search
+│ ├── evaluation.py # Logging, visualization, and analysis
+│ └── graph_utils.py # GCN graph creation and PyG training
+│
+├── app.py # Streamlit application
+└── README.md
+
 
 ## 🧾 **Summary**
 
