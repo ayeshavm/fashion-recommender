@@ -7,9 +7,9 @@ Fashion Recommenders are behind nearly every shopping experience - from suggesti
 In this project, I built a Graph Neural Network (GNN) used for unsupervised fashion recommendation.  The model learns item relationships from co-occurrence data and visual context, allowing it to generate meaningful product suggestions based on learned embeddings.
 
 ## 🧩 **Problem Description**
-Not everyone has an intuitive sense of style.  Choosing what to wear or even figuring out what goes together can ften feel frustrating and time-consuming.  For many, shopping can be overwhelming, with endless options but little guidance tailored to their personal taste.  
+Not everyone has an intuitive sense of style.  Choosing what to wear or even figuring out what goes together can often feel frustrating and time-consuming.  For many, shopping can be overwhelming, with endless options but little guidance tailored to their personal taste.  
 
-This project aims to ease that process by learning patterns in product relationships, and visual aesthetics.  By building a Graph Neural Network (GNN) model that captures the connections between fashion items, we can generate personalized and visually coherent product recommendations. Instead of relying on hard-coded rules or manual tagging, the system uses a Graph Neural Network (GNN) to learn embeddings that reflect nuanced relationships in fashion — from visual similarity to contextual co-occurrence.
+This project aims to ease that process by learning patterns in product relationships, and visual aesthetics.  By building a Graph Neural Network (GNN) model that captures the connections between fashion items, we can generate personalized and visually coherent product recommendations. Instead of relying on hard-coded rules or manual tagging, the system uses a Graph Neural Network (GNN) to learn embeddings that reflect nuanced relationships in fashion - from visual similarity to contextual co-occurrence.
 
 These embeddings are then used to suggest similar or complementary items, helping users discover styles that feel both authentic and wearable.
 
@@ -19,12 +19,8 @@ A curated collection of Zara product images, organized by clothing type and visu
 
 
 ## 🧹 **Data Processing**
-- images were renamed
-- BLIP captions were not producing accurate captions, and have to be cleaned up for this MVP
-- Generate the graph architecture, where
-   - `Nodes` : item node i.e. each item image will have an item node
-               attribute node i.e. each keyword will correspond to an attribute node
-   - `Edges` : item -> attribute edge, and we have item -> item for item similarity edges
+- Renamed images into a standard naming convention.
+- BLIP captions generated were not producing accurate captions, and have to be cleaned up for this MVP
 
 Example of BLIP captions generated: 
 
@@ -32,6 +28,11 @@ Example of BLIP captions generated:
 ![White pleated skirt](data/screenshots/zara_05.jpg)
 `🖼️ zara_06.jpg → a brown jacket with a pepo collar and a pepo pepo pepo pepo pepo` --> Updated to `a knit peplum brown jacket with a peterpan collar`
 ![Brown peplum jacket](data/screenshots/zara_06.jpg)
+
+- Generate the graph architecture, where
+   - `Nodes` : item node i.e. each item image will have an item node
+               attribute node i.e. each keyword will correspond to an attribute node
+   - `Edges` : item -> attribute edge, and we have item -> item for item similarity edges
 
 
 ## 🔍 **EDA**
